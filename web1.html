@@ -1,0 +1,173 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>IoT Dashboard Lemon</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>IoT Dashboard Lemon</h1>
+
+    <p><b>Kelembaban Tanah:</b> <span id="soilMoisture">-</span></p>
+    <p><b>Level Air:</b> <span id="waterLevel">-</span></p>
+    <p><b>Status Pompa:</b> <span id="pumpStatus">-</span></p>
+    <h2>Level Air</h2>
+    <div class="water-tank">
+        <div class="water" id="waterFill"></div>
+        <div class="water-label" id="waterText">0%</div>
+    </div>
+
+    <h2>Grafik Kelembaban Tanah</h2>
+    <canvas id="soilChart"></canvas>
+
+    <script>
+        // Firebase config (isi sesuai project kamu)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBBk758KxSSXxxiYYNoGx5uTEsD_M_ZM1Q",
+            authDomain: "lemoniot.firebaseapp.com",
+            databaseURL: "https://lemoniot-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "lemoniot",
+            storageBucket: "lemoniot.firebasestorage.app",
+            messagingSenderId: "120557510666",
+            appId: "1:120557510666:web:05bcadbb204a12e765bff3"
+        };
+
+        // Init Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Referensi database
+        const soilRef = db.ref("lemon_project/soil_moisture");
+        const waterRef = db.ref("lemon_project/water_level");
+        const pumpRef = db.ref("lemon_project/pump_status");
+
+        // Update tampilan teks realtime
+        soilRef.on("value", (snapshot) => {
+            document.getElementById("soilMoisture").innerText = snapshot.val() + " %";
+        });
+
+        waterRef.on("value", (snapshot) => {
+            document.getElementById("waterLevel").innerText = snapshot.val() + " %";
+        });
+
+        pumpRef.on("value", (snapshot) => {
+            document.getElementById("pumpStatus").innerText = snapshot.val();
+        });
+
+        waterRef.on("value", (snapshot) => {
+            const value = snapshot.val();
+            if (value !== null) {
+                document.getElementById("waterLevel").innerText = value + " %";
+
+                // Update visual tong air
+                const waterDiv = document.getElementById("waterFill");
+                waterDiv.style.height = value + "%"; // isi tong sesuai persen
+                document.getElementById("waterText").innerText = value + "%";
+            }
+        });
+
+
+        // --- Chart.js setup ---
+        const ctx = document.getElementById("soilChart").getContext("2d");
+        const soilChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [{
+                    label: "Soil Moisture (%)",
+                    data: [],
+                    borderColor: "blue",
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: "Time" } },
+                    y: { beginAtZero: true, title: { display: true, text: "Moisture (%)" } }
+                }
+            }
+        });
+
+        // Update chart realtime
+        soilRef.on("value", (snapshot) => {
+            const value = snapshot.val();
+            if (value !== null) {
+                const currentTime = new Date().toLocaleTimeString();
+                soilChart.data.labels.push(currentTime);
+                soilChart.data.datasets[0].data.push(value);
+
+                // Batas data (10 terakhir saja)
+                if (soilChart.data.labels.length > 10) {
+                    soilChart.data.labels.shift();
+                    soilChart.data.datasets[0].data.shift();
+                }
+
+                soilChart.update();
+            }
+        });
+    </script>
+</body>
+
+</html> -->
+
+<!--============================================-->
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>IoT Dashboard Lemon</title>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>😛Lemon IoT Dashboard</h1>
+
+  <div class="dashboard">
+    <!-- Bagian kiri -->
+    <div class="left-panel">
+      <div class="card">
+        <b>Kelembaban Tanah:</b> <span id="soilMoisture">-</span>
+      </div>
+
+      <div class="card">
+        <b>Level Air:</b> <span id="waterLevel">-</span>
+        <div class="water-tank">
+          <div class="water" id="waterFill"></div>
+          <div class="water-label" id="waterText">0%</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <b>Status Pompa:</b> <span id="pumpStatus">-</span>
+      </div>
+    </div>
+
+    <!-- Bagian kanan -->
+    <div class="right-panel">
+      <h2>Grafik Kelembaban Tanah</h2>
+      <canvas id="soilChart"></canvas>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="app.js"></script>
+</body>
+
+</html>
