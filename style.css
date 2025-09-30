@@ -1,72 +1,62 @@
-/* body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
-}
-
-h1 {
-  color: #2c3e50;
-}
-
-h2 {
-  margin-top: 30px;
-  color: #34495e;
-}
-
-.water-tank {
-  position: relative;
-  width: 120px;
-  height: 250px;
-  border: 4px solid #333;
-  border-radius: 60px;
-  overflow: hidden;
-  background: rgba(173, 216, 230, 0.2);
-  margin: 20px auto;
-}
-
-.water {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: lightblue;
-  transition: height 0.5s ease;
-}
-
-.water-label {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 50%;
-  font-size: 18px;
-  font-weight: bold;
-  color: #000;
-} */
-
-/*====================================*/
-
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
+  margin: 0;
   background: #f9f9f9;
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background: #333;
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.sidebar li:hover {
+  background: #555;
+}
+
+/* Konten utama */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
 }
 
 h1 {
-  text-align: center;
   margin-bottom: 20px;
 }
 
-/* Layout utama */
-.dashboard {
-  display: grid;
-  grid-template-columns: 1fr 2fr; /* kiri kecil, kanan besar */
-  gap: 20px;
-}
-
-/* Panel kiri */
-.left-panel {
+/* Panel monitoring */
+.top-panel {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -74,6 +64,8 @@ h1 {
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  text-align: center;
 }
 
 /* Visual tong air */
@@ -82,7 +74,7 @@ h1 {
   width: 80px;
   height: 120px;
   border: 2px solid #333;
-  margin-top: 10px;
+  margin: 10px auto 0 auto;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -104,10 +96,34 @@ h1 {
   font-weight: bold;
 }
 
-/* Panel kanan (grafik) */
-.right-panel {
+#soilStatus {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.right-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.chart-container {
+  flex: 3; /* grafik lebih besar */
+}
+
+.status-card {
+  flex: 1;
+  background: white;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Grafik */
+.bottom-panel {
   background: white;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
 }
