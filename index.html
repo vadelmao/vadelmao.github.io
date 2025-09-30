@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>IoT Dashboard Lemon</title>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>🍋 Dashboard</h2>
+    <ul>
+      <li onclick="showPage('monitoring')">Monitoring</li>
+      <li onclick="showPage('info')">Info</li>
+    </ul>
+  </div>
 
+  <!-- Konten utama -->
+  <div class="content">
+    <!-- Page Monitoring -->
+    <div id="monitoring" class="page active">
+      <h1>LemonCalif Monitoring Sistem</h1>
+      <div class="top-panel">
+        <div class="card">
+        <b>Kelembaban Tanah:</b> <span id="soilMoisture">-</span>
+        <div id="soilStatus">-</div>
+        </div>
+
+        <div class="card">
+          <b>Level Air:</b> <span id="waterLevel">-</span>
+          <div class="water-tank">
+            <div class="water" id="waterFill"></div>
+            <div class="water-label" id="waterText">0%</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <b>Status Pompa:</b> <span id="pumpStatus">-</span>
+        </div>
+      </div>
+
+      <!-- <div class="bottom-panel">
+        <h2>Grafik Kelembaban Tanah</h2>
+        <canvas id="soilChart"></canvas>
+      </div> -->
+
+      <!-- Bagian kanan -->
+        <div class="right-panel">
+        <h2>Grafik Kelembaban Tanah</h2>
+        <div class="right-content">
+            <div class="chart-container">
+            <canvas id="soilChart"></canvas>
+            </div>
+            <div class="status-card">
+            <b>Status Alat:</b> <span id="systemMode">-</span>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Page Info -->
+    <div id="info" class="page">
+      <h1>Info Penanaman Lemon California</h1>
+      <div class="card">
+        <p>✅ Gunakan tanah yang gembur dengan drainase baik.</p>
+        <p>✅ Penyiraman dilakukan rutin, jangan terlalu kering maupun terlalu becek.</p>
+        <p>✅ Tanaman membutuhkan sinar matahari minimal 6 jam per hari.</p>
+        <p>✅ Pemupukan bisa menggunakan pupuk kandang atau kompos organik.</p>
+        <p>✅ Jaga kelembaban tanah sekitar 50–70% agar tanaman tetap sehat.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="app.js"></script>
+</body>
+</html>
