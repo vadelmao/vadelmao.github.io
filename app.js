@@ -1,12 +1,12 @@
 // Firebase config
 const firebaseConfig = {
-    apiKey: "AIzaSyBBk758KxSSXxxiYYNoGx5uTEsD_M_ZM1Q",
-    authDomain: "lemoniot.firebaseapp.com",
-    databaseURL: "https://lemoniot-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "lemoniot",
-    storageBucket: "lemoniot.firebasestorage.app",
-    messagingSenderId: "120557510666",
-    appId: "1:120557510666:web:05bcadbb204a12e765bff3"
+  apiKey: "AIzaSyBBk758KxSSXxxiYYNoGx5uTEsD_M_ZM1Q",
+  authDomain: "lemoniot.firebaseapp.com",
+  databaseURL: "https://lemoniot-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "lemoniot",
+  storageBucket: "lemoniot.firebasestorage.app",
+  messagingSenderId: "120557510666",
+  appId: "1:120557510666:web:05bcadbb204a12e765bff3"
 };
 
 // Init Firebase
@@ -17,13 +17,30 @@ const db = firebase.database();
 const soilRef = db.ref("lemon_project/soil_moisture");
 const waterRef = db.ref("lemon_project/water_level");
 const pumpRef = db.ref("lemon_project/pump_status");
+const modeRef = db.ref("lemon_project/mode");
 
+// Update kelembaban tanah
 // Update kelembaban tanah
 soilRef.on("value", (snapshot) => {
   const value = snapshot.val();
   document.getElementById("soilMoisture").innerText = value + " %";
   updateSoilChart(value);
+
+  // Tentukan status tanah
+  let statusText = "";
+  if (value < 40) {
+    statusText = "Tanah Kering";
+  } else if (value >= 50 && value <= 75) {
+    statusText = "Cukup Lembab";
+  } else if (value > 80) {
+    statusText = "Tanah Basah";
+  } else {
+    statusText = "Normal";
+  }
+
+  document.getElementById("soilStatus").innerText = statusText;
 });
+
 
 // Update level air
 waterRef.on("value", (snapshot) => {
@@ -39,6 +56,12 @@ waterRef.on("value", (snapshot) => {
 // Update status pompa
 pumpRef.on("value", (snapshot) => {
   document.getElementById("pumpStatus").innerText = snapshot.val();
+});
+
+// Update status alat
+modeRef.on("value", (snapshot) => {
+  const value = snapshot.val();
+  document.getElementById("systemMode").innerText = value ? value : "-";
 });
 
 // --- Chart.js setup ---
@@ -78,4 +101,10 @@ function updateSoilChart(value) {
   }
 
   soilChart.update();
+}
+
+// --- Switch halaman ---
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
 }
