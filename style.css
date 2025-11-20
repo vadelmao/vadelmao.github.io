@@ -127,3 +127,87 @@ h1 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   max-height: 300px;
 }
+
+/* ================================
+   STYLE UNTUK HALAMAN KONTROL
+   ================================ */
+
+/* Container utama */
+.control-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Status mode */
+#modeStatus {
+  font-weight: bold;
+  font-size: 18px;
+  color: #222;
+}
+
+/* Tombol mode */
+.mode-btn {
+  background: #008cff;
+  color: white;
+  padding: 10px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 15px 0;
+  width: 150px;
+  transition: 0.2s;
+}
+
+.mode-btn:hover {
+  background: #006fd1;
+}
+
+/* Tombol pompa */
+.pump-btn {
+  background: #444;
+  color: white;
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 120px;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+/* Jika tombol aktif */
+.pump-btn.enabled {
+  background: #28a745;
+}
+
+.pump-btn.enabled:hover {
+  background: #1e7a32;
+}
+
+/* Jika disabled */
+.pump-btn:disabled {
+  background: #a0a0a0;
+  cursor: not-allowed;
+}
+
+#kontrol button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 15px;
+  border: none;
+  background: #4da6ff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#kontrol button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
