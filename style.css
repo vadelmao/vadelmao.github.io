@@ -103,20 +103,27 @@ h1 {
 
 .right-content {
   display: flex;
-  align-items: flex-start;
   gap: 20px;
+  align-items: flex-start;
 }
 
 .chart-container {
-  flex: 3; /* grafik lebih besar */
+  flex: 4;
+}
+
+.side-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .status-card {
-  flex: 1;
   background: white;
-  padding: 50px;
+  padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+  text-align: center;
 }
 
 /* Grafik */
@@ -210,4 +217,36 @@ h1 {
 #kontrol button:disabled {
   background: gray;
   cursor: not-allowed;
+}
+/* ==========================
+   Soil pH
+========================== */
+
+#phStatus {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#phADC {
+  font-weight: bold;
+}
+
+/* Warna status pH */
+
+.ph-acid {
+  color: #e74c3c;
+}
+
+.ph-neutral {
+  color: #27ae60;
+}
+
+.ph-alkaline {
+  color: #2980b9;
+}
+
+.chart-container canvas{
+    width:100% !important;
+    height:330px !important;
 }
