@@ -19,6 +19,8 @@ const waterRef = db.ref("lemon_project/water_level");
 const pumpRef = db.ref("lemon_project/pump_status");
 const controlCommandRef = db.ref("lemon_project/manual_command");
 const modeRef = db.ref("lemon_project/mode");
+const phADCRef = db.ref("lemon_project/ph_adc");
+const phStatusRef = db.ref("lemon_project/ph_status");
 
 // Variabel global untuk simpan data sensor
 let latestSoil = 0;
@@ -73,6 +75,51 @@ pumpRef.on("value", (snapshot) => {
             document.getElementById("pumpStatus").innerText = "OFF";
         }
     }
+});
+
+// Update nilai ADC pH
+phADCRef.on("value", (snapshot) => {
+
+    const value = snapshot.val();
+
+    document.getElementById("phADC").innerText =
+        value !== null ? value : "-";
+
+});
+
+// Update status pH
+phStatusRef.on("value", (snapshot) => {
+
+    const status = snapshot.val();
+    const phElement = document.getElementById("phStatus");
+
+    phElement.classList.remove(
+        "ph-acid",
+        "ph-neutral",
+        "ph-alkaline"
+    );
+
+    switch (status) {
+
+        case "Acidic":
+            phElement.innerText = "Asam";
+            phElement.classList.add("ph-acid");
+            break;
+
+        case "Near Neutral":
+            phElement.innerText = "Mendekati Netral";
+            phElement.classList.add("ph-neutral");
+            break;
+
+        case "Alkaline":
+            phElement.innerText = "Basa";
+            phElement.classList.add("ph-alkaline");
+            break;
+
+        default:
+            phElement.innerText = "-";
+    }
+
 });
 
 // Update status alat
