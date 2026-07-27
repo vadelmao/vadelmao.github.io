@@ -48,21 +48,49 @@
                 </div>
             </div>
 
-            <!-- <div class="bottom-panel">
-        <h2>Grafik Kelembaban Tanah</h2>
-        <canvas id="soilChart"></canvas>
-      </div> -->
+            <!-- <div class="card">
+                <b>Kondisi pH Tanah:</b>
+
+                <div id="phStatus">-</div>
+
+                <br>
+
+                <small>
+                    Nilai ADC :
+                    <span id="phADC">-</span>
+                </small>
+            </div> -->
 
             <!-- Bagian kanan -->
             <div class="right-panel">
                 <h2>Grafik Kelembaban Tanah</h2>
+
                 <div class="right-content">
+
                     <div class="chart-container">
                         <canvas id="soilChart"></canvas>
                     </div>
-                    <div class="status-card">
-                        <b>Status Alat:</b> <span id="systemMode">-</span>
+
+                    <div class="side-panel">
+
+                        <div class="status-card">
+                            <b>Status Alat:</b><br><br>
+                            <span id="systemMode">-</span>
+                        </div>
+
+                        <div class="status-card">
+                            <b>Kondisi pH Tanah</b><br><br>
+
+                            <div id="phStatus">-</div>
+
+                            <br>
+
+                            Nilai ADC :
+                            <span id="phADC">-</span>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
